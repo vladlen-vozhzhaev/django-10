@@ -124,18 +124,19 @@
 			</div>
 			<div class="col-sm-9">
 				<h3>Форма обратной связи</h3>
-				<form action="">
+				<form action="contact/" method="POST">
+					{% csrf_token %}
 					<div class="mb-3">
 						<label for="">Имя</label>
-						<input type="text" class="form-control" placeholder="Имя">
+						<input name="name" type="text" class="form-control" placeholder="Имя">
 					</div>
 					<div class="mb-3">
 						<label for="">E-mail</label>
-						<input type="text" class="form-control" placeholder="E-mail">
+						<input name="email" type="text" class="form-control" placeholder="E-mail">
 					</div>
 					<div class="mb-3">
 						<label for="">Сообщение</label>
-						<textarea name="" id="" cols="30" rows="10" class="form-control" placeholder="Сообщение"></textarea>
+						<textarea name="message" id="" cols="30" rows="10" class="form-control" placeholder="Сообщение"></textarea>
 					</div>
 					<div class="mb-3">
 						<input type="submit" class="form-control btn btn-primary">

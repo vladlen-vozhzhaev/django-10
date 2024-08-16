@@ -8,6 +8,12 @@ from django.shortcuts import render
 def index(req):
     return render(req, "index.html")
 
+def contact(req):
+    print(req.POST.get('name'))
+    print(req.POST.get('email'))
+    print(req.POST.get('message'))
+    return HttpResponse("Форма успешно отправлена")
+
 def game(request):
     num1 = random.randint(0,3)
     num2 = random.randint(0, 3)
