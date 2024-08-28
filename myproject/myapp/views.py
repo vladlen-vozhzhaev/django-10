@@ -1,12 +1,22 @@
 from django.http import HttpResponse
 import random
 
-from django.shortcuts import render
-
+from django.shortcuts import render, get_object_or_404
+from .models import Article
 # Create your views here.
 
 def index(req):
-    return render(req, "index.html")
+    articles = Article.objects.all()
+    return render(req, "index.html", {'articles': articles, 'title': 'Мой блог'})
+def article(req, id):
+    article = get_object_or_404(Article, id=id)
+    return render(req,"post.html", {'article': article, 'title': article.title})
+
+def register(req):
+    if req.method == 'POST':
+        pass
+    else:
+        pass
 
 def contact(req):
     print(req.POST.get('name'))
