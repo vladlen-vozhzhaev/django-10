@@ -3,4 +3,15 @@
     <h1>{{article.title}}</h1>
     <p>{{article.content}}</p>
     <p>Дата публикации: {{article.created_at}}</p>
- {% endblock %}
+    <hr>
+    {% if user.is_authenticated %}
+        <form action="">
+            <div class="mb-3">
+                <textarea name="comment" class="form-control" placeholder="Комментарий"></textarea>
+            </div>
+            <div class="mb-2">
+                <input type="submit" value="Отправить">
+            </div>
+        </form>
+    {% endif %}
+{% endblock %}

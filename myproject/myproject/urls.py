@@ -18,8 +18,10 @@ from django.contrib import admin
 from django.urls import path
 from myapp.views import *
 urlpatterns = [
-    path('', index),
+    path('', index, name='home'),
     path('contact/', contact),
+    path('register/', register),
+    path('login/', login_handler),
     path('admin/', admin.site.urls),
     path('article/<int:id>', article),
     path('game/', game, name="game"),

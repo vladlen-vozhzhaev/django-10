@@ -1,8 +1,10 @@
 from django.http import HttpResponse
 import random
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Article
+from .forms import UserRegisterFrom, UserAuthForm
+from django.contrib.auth import login, authenticate
 # Create your views here.
 
 def index(req):
@@ -14,9 +16,27 @@ def article(req, id):
 
 def register(req):
     if req.method == 'POST':
-        pass
+        print("Принимаем данные от пользователя")
+        form = UserRegisterFrom(req.POST)
+        if form.is_valid():
+            print("Валидация прошла успешно")
+            user = form.save()
+            login(req, user)
+            return redirect("home")
     else:
-        pass
+        form = UserRegisterFrom()
+    return render(req, 'register.html', {'form': form, 'title': "Регистрация на сайте"})
+
+def login_handler(req):
+    if req.method == 'POST':
+        form = UserAuthForm(req, data=req.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(req, user)
+            return redirect("home")
+    else:
+        form = UserAuthForm()
+    return render(req, 'login.html', {'form': form, 'title': "Вход на сайт"})
 
 def contact(req):
     print(req.POST.get('name'))
